@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ClearLibButton = new System.Windows.Forms.Button();
             this.ScanRoot = new System.Windows.Forms.Button();
             this.StatusBox = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.AlbumListBox = new System.Windows.Forms.ListBox();
             this.TrackListBox = new System.Windows.Forms.ListBox();
-            this.ClearLibButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,13 +53,24 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1084, 84);
+            this.panel1.Size = new System.Drawing.Size(1016, 84);
             this.panel1.TabIndex = 1;
+            // 
+            // ClearLibButton
+            // 
+            this.ClearLibButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClearLibButton.Location = new System.Drawing.Point(854, 3);
+            this.ClearLibButton.Name = "ClearLibButton";
+            this.ClearLibButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearLibButton.TabIndex = 6;
+            this.ClearLibButton.Text = "Clear Library";
+            this.ClearLibButton.UseVisualStyleBackColor = true;
+            this.ClearLibButton.Click += new System.EventHandler(this.ClearLibButton_Click);
             // 
             // ScanRoot
             // 
             this.ScanRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScanRoot.Location = new System.Drawing.Point(1003, 3);
+            this.ScanRoot.Location = new System.Drawing.Point(935, 3);
             this.ScanRoot.Name = "ScanRoot";
             this.ScanRoot.Size = new System.Drawing.Size(75, 23);
             this.ScanRoot.TabIndex = 4;
@@ -70,7 +81,7 @@
             // StatusBox
             // 
             this.StatusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.StatusBox.Location = new System.Drawing.Point(438, 47);
+            this.StatusBox.Location = new System.Drawing.Point(404, 47);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.Size = new System.Drawing.Size(235, 20);
             this.StatusBox.TabIndex = 5;
@@ -78,7 +89,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button3.Location = new System.Drawing.Point(600, 18);
+            this.button3.Location = new System.Drawing.Point(566, 18);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 2;
@@ -88,7 +99,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button2.Location = new System.Drawing.Point(519, 18);
+            this.button2.Location = new System.Drawing.Point(485, 18);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -98,7 +109,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button1.Location = new System.Drawing.Point(438, 18);
+            this.button1.Location = new System.Drawing.Point(404, 18);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -112,7 +123,7 @@
             this.ArtistListBox.FormattingEnabled = true;
             this.ArtistListBox.Location = new System.Drawing.Point(12, 103);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(183, 459);
+            this.ArtistListBox.Size = new System.Drawing.Size(183, 433);
             this.ArtistListBox.TabIndex = 2;
             // 
             // AlbumListBox
@@ -122,7 +133,7 @@
             this.AlbumListBox.FormattingEnabled = true;
             this.AlbumListBox.Location = new System.Drawing.Point(201, 103);
             this.AlbumListBox.Name = "AlbumListBox";
-            this.AlbumListBox.Size = new System.Drawing.Size(206, 446);
+            this.AlbumListBox.Size = new System.Drawing.Size(206, 433);
             this.AlbumListBox.TabIndex = 3;
             // 
             // TrackListBox
@@ -133,25 +144,14 @@
             this.TrackListBox.FormattingEnabled = true;
             this.TrackListBox.Location = new System.Drawing.Point(412, 103);
             this.TrackListBox.Name = "TrackListBox";
-            this.TrackListBox.Size = new System.Drawing.Size(684, 446);
+            this.TrackListBox.Size = new System.Drawing.Size(616, 433);
             this.TrackListBox.TabIndex = 4;
-            // 
-            // ClearLibButton
-            // 
-            this.ClearLibButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearLibButton.Location = new System.Drawing.Point(922, 3);
-            this.ClearLibButton.Name = "ClearLibButton";
-            this.ClearLibButton.Size = new System.Drawing.Size(75, 23);
-            this.ClearLibButton.TabIndex = 6;
-            this.ClearLibButton.Text = "Clear Library";
-            this.ClearLibButton.UseVisualStyleBackColor = true;
-            this.ClearLibButton.Click += new System.EventHandler(this.ClearLibButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1109, 577);
+            this.ClientSize = new System.Drawing.Size(1041, 557);
             this.Controls.Add(this.TrackListBox);
             this.Controls.Add(this.AlbumListBox);
             this.Controls.Add(this.ArtistListBox);

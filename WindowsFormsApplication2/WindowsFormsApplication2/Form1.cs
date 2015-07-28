@@ -15,7 +15,7 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         XElement root;
-        string RootDirectory = "E:\\Music";
+        string RootDirectory = "E:\\Music\\Born of Osiris";
         string FileType = ".mp3";
         string xmlPath = "E:\\Music\\LIBRARY.xml";       
 
@@ -44,9 +44,9 @@ namespace WindowsFormsApplication2
             else
             {
                 root = XElement.Load(xmlPath);
-                PopulateTracks();
                 PopulateArtists();
-                PopulateAlbums();
+                PopulateAlbums(null);
+                PopulateTracks(null, null);
             }
         }        
 
@@ -137,22 +137,34 @@ namespace WindowsFormsApplication2
 
             // check for nulls on these and fill in dummy values (Unknown Artist)
             TagLib.File tag = TagLib.File.Create(TargetPath);
-            if((artist = tag.Tag.FirstAlbumArtist) == null)
+
+            if ((artist = tag.Tag.FirstAlbumArtist) == null)
             {
-                artist = tag.Tag.FirstPerformer;
+                if ((artist = tag.Tag.FirstPerformer) == null)
+                {
+                    artist = "Unknown Artist";
+                }                    
+            }               
+
+            if ((title = tag.Tag.Title) == null)
+            {
+                title = Path.GetFileNameWithoutExtension(TargetPath);
             }
-            title = tag.Tag.Title;
-            album = tag.Tag.Album;
+
+            if ((album = tag.Tag.Album) == null)
+            {
+                album = "Unknown Album";
+            }
             year = (int)tag.Tag.Year;
             trackNum = (int)tag.Tag.Track;
 
-            // get library track counter and increment
-            att = root.Attribute("Count");
-            num = Int32.Parse(att.Value) + 1;
-            att.SetValue(num.ToString());
+            // old way. keeping for now as back up
+            // att = root.Attribute("Count");
+            // num = Int32.Parse(att.Value) + 1;
+            // att.SetValue(num.ToString());
 
-            // fucking lol? try later
-            // root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
+            // get library track counter and increment
+            root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
 
             XElement Track =
                 new XElement("Track",
@@ -162,54 +174,87 @@ namespace WindowsFormsApplication2
                     new XElement("Artist", artist),
                     new XElement("TrackNumber", trackNum),
                     new XElement("Year", year),
-                    new XElement("DateAdded", DateTime.Now.ToString("d")),
+                    new XElement("DateAdded", DateTime.Now.ToString("g")),
                     new XElement("Path", TargetPath)
                 );
-
             root.Add(Track);
         }
 
         /* add all artists to artist list */
         public void PopulateArtists()
-        {
+        {          
+            IEnumerable<XElement> de =
+                (from el in root.Elements("Track").Elements("Artist")
+                select el).OrderBy(x => x.Value)
+                          .GroupBy(x => x.Value)
+                          .Select(x => x.First());
+
             ArtistListBox.Items.Clear();
             ArtistListBox.Items.Add("All Artists");
+
+            foreach (XElement el in de)
+            {
+                ArtistListBox.Items.Add(el.Value);
+            }
         }
 
         /* add albums depending on artist selected */
-        public void PopulateAlbums()
+        public void PopulateAlbums(string album)
         {
             AlbumListBox.Items.Clear();
             AlbumListBox.Items.Add("All Albums");
         }
 
         /* add songs depending on album(s) selected */
-        public void PopulateTracks()
+        public void PopulateTracks(string artist, string album)
         {
-            IEnumerable<XElement> de =
-                from el in root.Descendants("Title")
-                select el;
+            IEnumerable<XElement> de = null;
             TrackListBox.Items.Clear();
+
+            // all tracks alphabetically
+            if ((artist == null) && (album == null))
+            {
+                de = root.Elements("Track").Elements("Title")
+                         .OrderBy(element => element.Value)
+                         .ToList();                           
+            }
+            else if ((artist != null) && (album == null))   // specific artist
+            {
+                de =
+                    from el in root.Elements("Track")
+                    where (string)el.Element("Artist") == artist
+                    select el;
+            }
+            else if ((artist == null) && (album != null))   // specific album
+            {
+
+            }
+            else // specific artist and album
+            {
+
+            }
+
             foreach (XElement el in de)
             {
                 TrackListBox.Items.Add(el.Value);
-            }
+            }            
         }
 
         private void ScanRoot_Click(object sender, EventArgs e)
         {
             ScanDirectory(RootDirectory);
-            PopulateTracks();
             PopulateArtists();
-            PopulateAlbums();
+            PopulateAlbums(null);
+            PopulateTracks(null, null);
+            
         }
 
         private void ClearLibButton_Click(object sender, EventArgs e)
         {
             ClearLibrary();
-            PopulateTracks();
             PopulateArtists();
-            PopulateAlbums();
+            PopulateAlbums(null);
+            PopulateTracks(null, null);
         }
     }
 }
