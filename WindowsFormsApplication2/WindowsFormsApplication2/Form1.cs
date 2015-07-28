@@ -15,7 +15,7 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         XElement root;
-        string RootDirectory = "E:\\Music\\Ceremony";
+        string RootDirectory = "E:\\Music";
         string FileType = ".mp3";
         string xmlPath = "E:\\Music\\LIBRARY.xml";       
 
