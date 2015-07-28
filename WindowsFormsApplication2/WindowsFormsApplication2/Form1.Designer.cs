@@ -42,11 +42,13 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
+            this.ClearLibButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ClearLibButton);
             this.panel1.Controls.Add(this.ScanRoot);
             this.panel1.Controls.Add(this.StatusBox);
             this.panel1.Controls.Add(this.button3);
@@ -151,6 +153,16 @@
             this.imageList3.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // ClearLibButton
+            // 
+            this.ClearLibButton.Location = new System.Drawing.Point(858, 3);
+            this.ClearLibButton.Name = "ClearLibButton";
+            this.ClearLibButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearLibButton.TabIndex = 6;
+            this.ClearLibButton.Text = "Clear Library";
+            this.ClearLibButton.UseVisualStyleBackColor = true;
+            this.ClearLibButton.Click += new System.EventHandler(this.ClearLibButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +197,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ImageList imageList3;
+        private System.Windows.Forms.Button ClearLibButton;
     }
 }
 

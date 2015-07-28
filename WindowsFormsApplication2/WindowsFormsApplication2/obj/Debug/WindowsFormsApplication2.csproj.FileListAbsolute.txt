@@ -16,3 +16,6 @@ C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsForms
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\taglib-sharp.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\policy.2.0.taglib-sharp.config
