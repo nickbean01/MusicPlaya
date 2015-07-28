@@ -14,9 +14,10 @@ namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
-        string RootDirectory = "E:\\Music\\TEST FOLDER";
+        //string RootDirectory = "E:\\Music\\TEST FOLDER";
+        string RootDirectory = "E:\\Music\\Ceremony";
         string FileType = ".mp3";
-        string xmlPath = "E:\\Music\\test3.xml";
+        string xmlPath = "E:\\Music\\LIBRARY.xml";
         XElement root;
 
         public Form1()
@@ -154,6 +155,9 @@ namespace WindowsFormsApplication2
             year = 2012;
             dateAdded = "7-27-2015";
 
+            XAttribute att = root.Attribute("Count");
+            System.Diagnostics.Debug.WriteLine(root.Attribute("Count").Value);
+
             XElement Track =
                 new XElement("Track",
                     new XAttribute("ID", num),
@@ -165,6 +169,7 @@ namespace WindowsFormsApplication2
                     new XElement("DateAdded", dateAdded),
                     new XElement("Path", TargetPath)
                 );
+
             root.Add(Track);
             // need to increment 'global' counter in XML to prevent duplicate Track ID attribute
             // maybe just use path as a 'key'? would prevent duplicates no probbbb
