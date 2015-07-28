@@ -16,8 +16,8 @@ namespace WindowsFormsApplication2
     {
         string RootDirectory = "E:\\Music\\TEST FOLDER";
         string FileType = ".mp3";
-        string xmlPath = "E:\\Music\\TestLib.xml";
-        string newFile = "E:\\Music\\test3.xml";
+        string xmlPath = "E:\\Music\\test3.xml";
+        XElement root;
 
         public Form1()
         {
@@ -29,13 +29,15 @@ namespace WindowsFormsApplication2
         public void ReadLibrary()
         {
             XDocument doc;
+
+            // creates XML file if it doesn't already exist
             if (!File.Exists(xmlPath))
             {
                 CreateLibrary();
             }
             else
             {
-                
+                root = XElement.Load(xmlPath);
             }
         }
 
@@ -66,11 +68,21 @@ namespace WindowsFormsApplication2
         /* creates XML library file */
         public void CreateLibrary()
         {
+            System.Diagnostics.Debug.WriteLine("HWAAYYYYYY");
             if (File.Exists(xmlPath))
             {
                 // you goofed, should never happen
                 return;
             }
+            //File.Create(xmlPath);
+
+            root = new XElement("Library",
+                new XAttribute("Count", "1")
+                );
+            root.Save(xmlPath);
+
+            System.Diagnostics.Debug.WriteLine(root);
+
             ScanDirectory(RootDirectory);
         }
 
@@ -96,8 +108,10 @@ namespace WindowsFormsApplication2
                     {
                         TrackListBox.Items.Add(TargetPath);
 
-                        // first check if the path already exists in the XML file                      
-                        InsertTrack(TargetPath);                        
+                        if (!CheckPathExists(TargetPath))
+                        {
+                            InsertTrack(TargetPath);
+                        }                                            
                     }
                 }
                 else if (Directory.Exists(TargetPath))
@@ -108,8 +122,15 @@ namespace WindowsFormsApplication2
                 {
                     System.Diagnostics.Debug.WriteLine(TargetPath + " does not exist or cannot be opened.");
                 }
-            }         
+            }
+            root.Save(xmlPath);       
             return;
+        }
+
+        /* checks if an track with the path exists in the library */
+        private Boolean CheckPathExists(string TargetPath)
+        {
+            return false;
         }
 
         /* inserts new track to XML file */
@@ -144,9 +165,10 @@ namespace WindowsFormsApplication2
                     new XElement("DateAdded", dateAdded),
                     new XElement("Path", TargetPath)
                 );
+            root.Add(Track);
             // need to increment 'global' counter in XML to prevent duplicate Track ID attribute
             // maybe just use path as a 'key'? would prevent duplicates no probbbb
-            System.Diagnostics.Debug.WriteLine(Track);
+            System.Diagnostics.Debug.WriteLine(root);
         }
 
         private void ScanRoot_Click(object sender, EventArgs e)
