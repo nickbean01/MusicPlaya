@@ -135,6 +135,7 @@ namespace WindowsFormsApplication2
             int num;
             int year;
 
+            // check for nulls on these and fill in dummy values (Unknown Artist)
             TagLib.File tag = TagLib.File.Create(TargetPath);
             if((artist = tag.Tag.FirstAlbumArtist) == null)
             {
