@@ -150,6 +150,9 @@ namespace WindowsFormsApplication2
             num = Int32.Parse(att.Value) + 1;
             att.SetValue(num.ToString());
 
+            // fucking lol? try later
+            // root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
+
             XElement Track =
                 new XElement("Track",
                     new XAttribute("ID", num),
