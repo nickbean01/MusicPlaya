@@ -156,9 +156,10 @@ namespace WindowsFormsApplication2
 
         private void AlbumListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string album, artist = null;
+            string album = null;
+            string artist = null;
 
-            if ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums")
+            if ((AlbumListBox.SelectedIndex >= 0) && ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums"))
                 album = null;
 
             if ((ArtistListBox.SelectedIndex >= 0) && (artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
