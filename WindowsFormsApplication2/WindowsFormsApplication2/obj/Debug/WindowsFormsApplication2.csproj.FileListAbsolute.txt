@@ -19,3 +19,4 @@ C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsForms
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\policy.2.0.taglib-sharp.dll
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\taglib-sharp.dll
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MusicPlayer.exe.config
