@@ -15,7 +15,7 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         XElement root;
-        string RootDirectory = "E:\\Music\\Test Folder";
+        string RootDirectory = "E:\\Music";
         string FileType = ".mp3";
         string xmlPath = "E:\\Music\\LIBRARY.xml";       
 
@@ -243,7 +243,7 @@ namespace WindowsFormsApplication2
                      where (string)el.Element("Artist") == artist
                      select el.Element("Title"))
                     .OrderBy(x => x.Parent.Element("Album").Value)
-                    .ThenBy(x => x.Parent.Element("TrackNumber").Value);
+                    .ThenBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
             }
             else if ((artist == null) && (album != null))   // specific album
             {
