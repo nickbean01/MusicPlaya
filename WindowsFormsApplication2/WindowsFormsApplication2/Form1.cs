@@ -15,7 +15,7 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         XElement root;
-        string RootDirectory = "E:\\Music\\Born of Osiris";
+        string RootDirectory = "E:\\Music\\Test Folder";
         string FileType = ".mp3";
         string xmlPath = "E:\\Music\\LIBRARY.xml";       
 
@@ -158,11 +158,6 @@ namespace WindowsFormsApplication2
             year = (int)tag.Tag.Year;
             trackNum = (int)tag.Tag.Track;
 
-            // old way. keeping for now as back up
-            // att = root.Attribute("Count");
-            // num = Int32.Parse(att.Value) + 1;
-            // att.SetValue(num.ToString());
-
             // get library track counter and increment
             root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
 
@@ -199,10 +194,33 @@ namespace WindowsFormsApplication2
         }
 
         /* add albums depending on artist selected */
-        public void PopulateAlbums(string album)
+        public void PopulateAlbums(string artist)
         {
+            IEnumerable<XElement> de = null;
             AlbumListBox.Items.Clear();
             AlbumListBox.Items.Add("All Albums");
+
+            if (artist == null)
+            {
+                de =
+                    (from el in root.Elements("Track").Elements("Album")
+                     select el).OrderBy(x => x.Value)
+                              .GroupBy(x => x.Value)
+                              .Select(x => x.First());
+            }
+            else
+            {
+                de =
+                   (from el in root.Elements("Track")
+                   where (string)el.Element("Artist") == artist
+                   select el.Element("Album")).OrderBy(x => Int32.Parse(x.Parent.Element("Year").Value))
+                                             .GroupBy(x => x.Value)
+                                             .Select(x => x.First());
+            }
+            foreach (XElement el in de)
+            {
+                AlbumListBox.Items.Add(el.Value);
+            }
         }
 
         /* add songs depending on album(s) selected */
@@ -221,17 +239,26 @@ namespace WindowsFormsApplication2
             else if ((artist != null) && (album == null))   // specific artist
             {
                 de =
-                    from el in root.Elements("Track")
-                    where (string)el.Element("Artist") == artist
-                    select el;
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Artist") == artist
+                     select el.Element("Title"))
+                    .OrderBy(x => x.Parent.Element("Album").Value)
+                    .ThenBy(x => x.Parent.Element("TrackNumber").Value);
             }
             else if ((artist == null) && (album != null))   // specific album
             {
-
+                de =
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Album") == album
+                     select el.Element("Title")).OrderBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
             }
             else // specific artist and album
             {
-
+                de =
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Album") == album
+                     where (string)el.Element("Artist") == artist
+                     select el.Element("Title")).OrderBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
             }
 
             foreach (XElement el in de)
@@ -255,6 +282,29 @@ namespace WindowsFormsApplication2
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
+        }
+
+        private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string artist;
+            if((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
+                artist = null;
+
+            PopulateAlbums(artist);
+            PopulateTracks(artist, null);
+        }
+
+        private void AlbumListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string album, artist = null;
+
+            if ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums")
+                album = null;
+
+            if ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
+                artist = null;
+
+            PopulateTracks(artist, album);
         }
     }
 }

@@ -38,13 +38,16 @@
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.AlbumListBox = new System.Windows.Forms.ListBox();
             this.TrackListBox = new System.Windows.Forms.ListBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.progressBar1);
             this.panel1.Controls.Add(this.ClearLibButton);
             this.panel1.Controls.Add(this.ScanRoot);
             this.panel1.Controls.Add(this.StatusBox);
@@ -53,7 +56,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1016, 84);
+            this.panel1.Size = new System.Drawing.Size(1016, 111);
             this.panel1.TabIndex = 1;
             // 
             // ClearLibButton
@@ -91,7 +94,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button3.Location = new System.Drawing.Point(566, 18);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(73, 23);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -121,20 +124,22 @@
             this.ArtistListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ArtistListBox.FormattingEnabled = true;
-            this.ArtistListBox.Location = new System.Drawing.Point(12, 103);
+            this.ArtistListBox.Location = new System.Drawing.Point(12, 129);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(183, 433);
+            this.ArtistListBox.Size = new System.Drawing.Size(183, 407);
             this.ArtistListBox.TabIndex = 2;
+            this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
             // 
             // AlbumListBox
             // 
             this.AlbumListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.AlbumListBox.FormattingEnabled = true;
-            this.AlbumListBox.Location = new System.Drawing.Point(201, 103);
+            this.AlbumListBox.Location = new System.Drawing.Point(201, 129);
             this.AlbumListBox.Name = "AlbumListBox";
-            this.AlbumListBox.Size = new System.Drawing.Size(206, 433);
+            this.AlbumListBox.Size = new System.Drawing.Size(206, 407);
             this.AlbumListBox.TabIndex = 3;
+            this.AlbumListBox.SelectedIndexChanged += new System.EventHandler(this.AlbumListBox_SelectedIndexChanged);
             // 
             // TrackListBox
             // 
@@ -142,10 +147,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackListBox.FormattingEnabled = true;
-            this.TrackListBox.Location = new System.Drawing.Point(412, 103);
+            this.TrackListBox.Location = new System.Drawing.Point(412, 129);
             this.TrackListBox.Name = "TrackListBox";
-            this.TrackListBox.Size = new System.Drawing.Size(616, 433);
+            this.TrackListBox.Size = new System.Drawing.Size(616, 407);
             this.TrackListBox.TabIndex = 4;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(404, 73);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(235, 23);
+            this.progressBar1.TabIndex = 7;
             // 
             // Form1
             // 
@@ -175,6 +190,7 @@
         private System.Windows.Forms.TextBox StatusBox;
         private System.Windows.Forms.Button ScanRoot;
         private System.Windows.Forms.Button ClearLibButton;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
