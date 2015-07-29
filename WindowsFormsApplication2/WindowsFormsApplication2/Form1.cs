@@ -14,15 +14,16 @@ namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
-        MusicLibrary lib;      
+        MusicLibrary lib;
+        List<string> TrackIDs;
+        IEnumerable<XElement> TrackList;
 
         public Form1()
         {
             InitializeComponent();
 
             lib = new MusicLibrary("E:\\Music\\test folder", ".mp3", "E:\\Music\\LIBRARY.xml");
-
-            lib.ReadLibrary();
+            TrackIDs = new List<string>();
 
             PopulateArtists();
             PopulateAlbums(null);
@@ -31,18 +32,11 @@ namespace WindowsFormsApplication2
 
         /* add all artists to artist list */
         public void PopulateArtists()
-        {          
-            IEnumerable<XElement> de =
-                (from el in lib.GetXEl().Elements("Track").Elements("Artist")
-                select el)
-                .OrderBy(x => x.Value)
-                .GroupBy(x => x.Value)                          
-                .Select(x => x.First());
-
+        {
             ArtistListBox.Items.Clear();
             ArtistListBox.Items.Add("All Artists");
 
-            foreach (XElement el in de)
+            foreach (XElement el in lib.GetArtists())
             {
                 ArtistListBox.Items.Add(el.Value);
             }
@@ -51,30 +45,10 @@ namespace WindowsFormsApplication2
         /* add albums depending on artist selected */
         public void PopulateAlbums(string artist)
         {
-            IEnumerable<XElement> de = null;
             AlbumListBox.Items.Clear();
             AlbumListBox.Items.Add("All Albums");
 
-            if (artist == null)
-            {
-                de =
-                    (from el in lib.GetXEl().Elements("Track").Elements("Album")
-                     select el)
-                     .OrderBy(x => x.Value)
-                     .GroupBy(x => x.Value)
-                     .Select(x => x.First());
-            }
-            else
-            {
-                de =
-                   (from el in lib.GetXEl().Elements("Track")
-                   where (string)el.Element("Artist") == artist
-                   select el.Element("Album"))
-                   .OrderBy(x => Int32.Parse(x.Parent.Element("Year").Value))
-                   .GroupBy(x => x.Value)
-                   .Select(x => x.First());
-            }
-            foreach (XElement el in de)
+            foreach (XElement el in lib.GetAlbums(artist))
             {
                 AlbumListBox.Items.Add(el.Value);
             }
@@ -83,47 +57,14 @@ namespace WindowsFormsApplication2
         /* add songs depending on album(s) selected */
         public void PopulateTracks(string artist, string album)
         {
-            IEnumerable<XElement> de = null;
             TrackListBox.Items.Clear();
+            TrackIDs.Clear();
+            TrackList = lib.GetTracks(artist, album);
 
-            // all tracks alphabetically
-            if ((artist == null) && (album == null))
+            foreach (XElement el in TrackList)
             {
-                de = lib.GetXEl().Elements("Track").Elements("Title")
-                         .OrderBy(element => element.Value)
-                         .ToList();                           
-            }
-            else if ((artist != null) && (album == null))   // specific artist
-            {
-                de =
-                    (from el in lib.GetXEl().Elements("Track")
-                     where (string)el.Element("Artist") == artist
-                     select el.Element("Title"))
-                     .OrderBy(x => Int32.Parse(x.Parent.Element("Year").Value))
-                     .ThenBy(x => x.Parent.Element("Album").Value)
-                     .ThenBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
-            }
-            else if ((artist == null) && (album != null))   // specific album
-            {
-                de =
-                    (from el in lib.GetXEl().Elements("Track")
-                     where (string)el.Element("Album") == album
-                     select el.Element("Title"))
-                     .OrderBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
-            }
-            else // specific artist and album
-            {
-                de =
-                    (from el in lib.GetXEl().Elements("Track")
-                     where (string)el.Element("Album") == album
-                     where (string)el.Element("Artist") == artist
-                     select el.Element("Title"))
-                     .OrderBy(x => Int32.Parse(x.Parent.Element("TrackNumber").Value));
-            }
-
-            foreach (XElement el in de)
-            {
-                TrackListBox.Items.Add(el.Value);
+                TrackListBox.Items.Add(el.Element("Title").Value);
+                TrackIDs.Add(el.Attribute("ID").Value);
             }            
         }
 
@@ -166,6 +107,14 @@ namespace WindowsFormsApplication2
                 artist = null;
 
             PopulateTracks(artist, album);
+        }
+
+        private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selection = TrackListBox.SelectedIndex;
+            string ID = TrackIDs.ElementAt(TrackListBox.SelectedIndex);
+            StatusLabel.Text = ID;
+
         }
     }
 }

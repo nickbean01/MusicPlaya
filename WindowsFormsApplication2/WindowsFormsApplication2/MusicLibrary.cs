@@ -8,6 +8,7 @@ namespace WindowsFormsApplication2
 {
     internal class MusicLibrary
     {
+        Queue<XElement> PlayQueue;
         XElement root;
         string RootDirectory;
         string FileType;
@@ -18,6 +19,7 @@ namespace WindowsFormsApplication2
             this.RootDirectory = rootPath;
             this.FileType = type;
             this.xmlPath = path;
+            ReadLibrary();
         }
 
         private void CreateLibrary()
@@ -91,6 +93,87 @@ namespace WindowsFormsApplication2
             }
             root.Save(xmlPath);
             return;
+        }
+
+        /* return collection of tracks */
+        public IEnumerable<XElement> GetTracks(string artist, string album)
+        {
+            IEnumerable<XElement> de = null;
+
+            if ((artist == null) && (album == null))        // all tracks alphabetically
+            {
+                de =
+                    (from el in root.Elements("Track")
+                     .OrderBy(x => x.Element("Title").Value)
+                     select el);
+            }
+            else if ((artist != null) && (album == null))   // specific artist
+            {
+                de =
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Artist") == artist
+                     select el)
+                     .OrderBy(x => Int32.Parse(x.Element("Year").Value))
+                     .ThenBy(x => x.Element("Album").Value)
+                     .ThenBy(x => Int32.Parse(x.Element("TrackNumber").Value));
+            }
+            else if ((artist == null) && (album != null))   // specific album
+            {
+                de =
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Album") == album
+                     select el)
+                     .OrderBy(x => Int32.Parse(x.Element("TrackNumber").Value));
+            }
+            else    // specific artist and album
+            {
+                de =
+                    (from el in root.Elements("Track")
+                     where (string)el.Element("Album") == album
+                     where (string)el.Element("Artist") == artist
+                     select el)
+                     .OrderBy(x => Int32.Parse(x.Element("TrackNumber").Value));
+            }
+            return de;
+        }
+
+        /* return collection of albums */
+        public IEnumerable<XElement> GetAlbums(string artist)
+        {
+            IEnumerable<XElement> de = null;
+            if (artist == null)
+            {
+                de =
+                    (from el in root.Elements("Track").Elements("Album")
+                     select el)
+                     .OrderBy(x => x.Value)
+                     .GroupBy(x => x.Value)
+                     .Select(x => x.First());
+            }
+            else
+            {
+                de =
+                   (from el in root.Elements("Track")
+                    where (string)el.Element("Artist") == artist
+                    select el.Element("Album"))
+                   .OrderBy(x => Int32.Parse(x.Parent.Element("Year").Value))
+                   .GroupBy(x => x.Value)
+                   .Select(x => x.First());
+            }
+            return de;
+        }
+
+        /* return collection of artists */
+        public IEnumerable<XElement> GetArtists()
+        {
+            IEnumerable<XElement> de =
+                (from el in root.Elements("Track").Elements("Artist")
+                select el)
+                .OrderBy(x => x.Value)
+                .GroupBy(x => x.Value)
+                .Select(x => x.First());
+
+            return de;
         }
 
         /* inserts new track to XML file */
