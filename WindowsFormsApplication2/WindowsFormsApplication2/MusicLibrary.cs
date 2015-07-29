@@ -24,10 +24,8 @@ namespace WindowsFormsApplication2
 
         private void CreateLibrary()
         {
-            if (File.Exists(xmlPath))
-            {                
+            if (File.Exists(xmlPath))                
                 return;
-            }
 
             root = new XElement("Library",
                 new XAttribute("Count", "0")
@@ -78,7 +76,6 @@ namespace WindowsFormsApplication2
                         if (!CheckPathExists(TargetPath))
                         {
                             InsertTrack(TargetPath);
-
                         }
                     }
                 }
@@ -192,22 +189,15 @@ namespace WindowsFormsApplication2
             TagLib.File tag = TagLib.File.Create(TargetPath);
 
             if ((artist = tag.Tag.FirstAlbumArtist) == null)
-            {
                 if ((artist = tag.Tag.FirstPerformer) == null)
-                {
                     artist = "Unknown Artist";
-                }
-            }
 
             if ((title = tag.Tag.Title) == null)
-            {
                 title = Path.GetFileNameWithoutExtension(TargetPath);
-            }
 
             if ((album = tag.Tag.Album) == null)
-            {
                 album = "Unknown Album";
-            }
+            
             year = (int)tag.Tag.Year;
             trackNum = (int)tag.Tag.Track;
 
@@ -278,13 +268,11 @@ namespace WindowsFormsApplication2
             IEnumerable<XElement> de =
                 from el in root.Descendants("Path")
                 select el;
+
             foreach (XElement el in de)
-            {
                 if (String.Compare(el.Value, TargetPath) == 0)
-                {
                     return true;
-                }
-            }
+            
             return false;
         }
     }

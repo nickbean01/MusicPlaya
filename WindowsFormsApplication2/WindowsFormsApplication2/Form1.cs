@@ -37,9 +37,7 @@ namespace WindowsFormsApplication2
             ArtistListBox.Items.Add("All Artists");
 
             foreach (XElement el in lib.GetArtists())
-            {
                 ArtistListBox.Items.Add(el.Value);
-            }
         }
 
         /* add albums depending on artist selected */
@@ -49,9 +47,7 @@ namespace WindowsFormsApplication2
             AlbumListBox.Items.Add("All Albums");
 
             foreach (XElement el in lib.GetAlbums(artist))
-            {
                 AlbumListBox.Items.Add(el.Value);
-            }
         }
 
         /* add songs depending on album(s) selected */
@@ -114,7 +110,6 @@ namespace WindowsFormsApplication2
             int selection = TrackListBox.SelectedIndex;
             string ID = TrackIDs.ElementAt(TrackListBox.SelectedIndex);
             StatusLabel.Text = ID;
-
         }
     }
 }
