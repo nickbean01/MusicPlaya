@@ -8,7 +8,7 @@ namespace WindowsFormsApplication2
 {
     internal class MusicLibrary
     {
-        Queue<XElement> PlayQueue;
+        //Queue<XElement> PlayQueue;
         XElement root;
         string RootDirectory;
         string FileType;

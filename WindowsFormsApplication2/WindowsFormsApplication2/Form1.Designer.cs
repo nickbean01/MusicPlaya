@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.UpNextLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ClearLibButton = new System.Windows.Forms.Button();
@@ -39,8 +41,7 @@
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.AlbumListBox = new System.Windows.Forms.ListBox();
             this.TrackListBox = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.UpNextLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,8 +61,29 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1016, 111);
+            this.panel1.Size = new System.Drawing.Size(811, 115);
             this.panel1.TabIndex = 1;
+            // 
+            // UpNextLabel
+            // 
+            this.UpNextLabel.AutoSize = true;
+            this.UpNextLabel.Location = new System.Drawing.Point(680, 68);
+            this.UpNextLabel.Name = "UpNextLabel";
+            this.UpNextLabel.Size = new System.Drawing.Size(46, 13);
+            this.UpNextLabel.TabIndex = 10;
+            this.UpNextLabel.Text = "Up Next";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(680, 87);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(124, 21);
+            this.comboBox1.TabIndex = 9;
             // 
             // StatusLabel
             // 
@@ -73,10 +95,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(404, 73);
+            this.progressBar1.Location = new System.Drawing.Point(303, 73);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(235, 10);
             this.progressBar1.TabIndex = 7;
@@ -84,7 +103,7 @@
             // ClearLibButton
             // 
             this.ClearLibButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearLibButton.Location = new System.Drawing.Point(854, 3);
+            this.ClearLibButton.Location = new System.Drawing.Point(649, 3);
             this.ClearLibButton.Name = "ClearLibButton";
             this.ClearLibButton.Size = new System.Drawing.Size(75, 23);
             this.ClearLibButton.TabIndex = 6;
@@ -95,7 +114,7 @@
             // ScanRoot
             // 
             this.ScanRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScanRoot.Location = new System.Drawing.Point(935, 3);
+            this.ScanRoot.Location = new System.Drawing.Point(730, 3);
             this.ScanRoot.Name = "ScanRoot";
             this.ScanRoot.Size = new System.Drawing.Size(75, 23);
             this.ScanRoot.TabIndex = 4;
@@ -106,9 +125,9 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button3.Location = new System.Drawing.Point(566, 18);
+            this.button3.Location = new System.Drawing.Point(463, 18);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 27);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -116,9 +135,9 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button2.Location = new System.Drawing.Point(485, 18);
+            this.button2.Location = new System.Drawing.Point(382, 18);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 27);
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -126,9 +145,9 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button1.Location = new System.Drawing.Point(404, 18);
+            this.button1.Location = new System.Drawing.Point(301, 18);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -140,7 +159,7 @@
             this.ArtistListBox.FormattingEnabled = true;
             this.ArtistListBox.Location = new System.Drawing.Point(12, 129);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(183, 407);
+            this.ArtistListBox.Size = new System.Drawing.Size(185, 407);
             this.ArtistListBox.TabIndex = 2;
             this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
             // 
@@ -149,9 +168,9 @@
             this.AlbumListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.AlbumListBox.FormattingEnabled = true;
-            this.AlbumListBox.Location = new System.Drawing.Point(201, 129);
+            this.AlbumListBox.Location = new System.Drawing.Point(203, 129);
             this.AlbumListBox.Name = "AlbumListBox";
-            this.AlbumListBox.Size = new System.Drawing.Size(206, 407);
+            this.AlbumListBox.Size = new System.Drawing.Size(185, 407);
             this.AlbumListBox.TabIndex = 3;
             this.AlbumListBox.SelectedIndexChanged += new System.EventHandler(this.AlbumListBox_SelectedIndexChanged);
             // 
@@ -161,39 +180,33 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackListBox.FormattingEnabled = true;
-            this.TrackListBox.Location = new System.Drawing.Point(412, 129);
+            this.TrackListBox.Location = new System.Drawing.Point(394, 129);
             this.TrackListBox.Name = "TrackListBox";
-            this.TrackListBox.Size = new System.Drawing.Size(616, 407);
+            this.TrackListBox.Size = new System.Drawing.Size(239, 407);
             this.TrackListBox.TabIndex = 4;
             this.TrackListBox.SelectedIndexChanged += new System.EventHandler(this.TrackListBox_SelectedIndexChanged);
             // 
-            // comboBox1
+            // listBox1
             // 
-            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(680, 87);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(330, 21);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // UpNextLabel
-            // 
-            this.UpNextLabel.AutoSize = true;
-            this.UpNextLabel.Location = new System.Drawing.Point(680, 68);
-            this.UpNextLabel.Name = "UpNextLabel";
-            this.UpNextLabel.Size = new System.Drawing.Size(46, 13);
-            this.UpNextLabel.TabIndex = 10;
-            this.UpNextLabel.Text = "Up Next";
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(637, 129);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(187, 407);
+            this.listBox1.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 557);
+            this.ClientSize = new System.Drawing.Size(836, 561);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.TrackListBox);
             this.Controls.Add(this.AlbumListBox);
             this.Controls.Add(this.ArtistListBox);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
@@ -216,6 +229,7 @@
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Label UpNextLabel;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

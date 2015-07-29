@@ -15,15 +15,14 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         MusicLibrary lib;
-        List<string> TrackIDs;             // stores IDs of tracks currently in TrackListBox
-        IEnumerable<XElement> TrackList;    // collection of Track elements in TrackListBox
+        IEnumerable<XElement> XmlTrackList;    // collection of Track elements in TrackListBox
+        XElement currentTrack;
 
         public Form1()
         {
             InitializeComponent();
 
             lib = new MusicLibrary("E:\\Music\\test folder", ".mp3", "E:\\Music\\LIBRARY.xml");
-            TrackIDs = new List<string>();
 
             PopulateArtists();
             PopulateAlbums(null);
@@ -54,14 +53,13 @@ namespace WindowsFormsApplication2
         public void PopulateTracks(string artist, string album)
         {
             TrackListBox.Items.Clear();
-            TrackIDs.Clear();
-            TrackList = lib.GetTracks(artist, album);
+            TrackListBox.ClearSelected();          
+            XmlTrackList = lib.GetTracks(artist, album);
 
-            foreach (XElement el in TrackList)
+            foreach (XElement el in XmlTrackList)
             {
                 TrackListBox.Items.Add(el.Element("Title").Value);
-                TrackIDs.Add(el.Attribute("ID").Value);
-            }            
+            }
         }
 
         private void ScanRoot_Click(object sender, EventArgs e)
@@ -107,9 +105,12 @@ namespace WindowsFormsApplication2
 
         private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selection = TrackListBox.SelectedIndex;
-            string ID = TrackIDs.ElementAt(TrackListBox.SelectedIndex);
-            StatusLabel.Text = ID;
+            int selection;
+            if ((selection = TrackListBox.SelectedIndex) != -1)
+                currentTrack = XmlTrackList.ElementAt(selection);
+
         }
+
+        /* make a class for the Up-Next listbox with (title - Artist), and value as the path */
     }
 }

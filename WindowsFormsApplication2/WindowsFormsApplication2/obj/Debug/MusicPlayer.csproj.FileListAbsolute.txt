@@ -10,3 +10,5 @@ C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsForms
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\MusicPlayer.csproj.GenerateResource.Cache
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.xml
