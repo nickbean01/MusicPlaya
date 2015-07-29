@@ -15,8 +15,8 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         MusicLibrary lib;
-        List<string> TrackIDs;
-        IEnumerable<XElement> TrackList;
+        List<string> TrackIDs;             // stores IDs of tracks currently in TrackListBox
+        IEnumerable<XElement> TrackList;    // collection of Track elements in TrackListBox
 
         public Form1()
         {
@@ -99,7 +99,7 @@ namespace WindowsFormsApplication2
             if ((AlbumListBox.SelectedIndex >= 0) && ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums"))
                 album = null;
 
-            if ((ArtistListBox.SelectedIndex >= 0) && (artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
+            if ((ArtistListBox.SelectedIndex >= 0) && ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists"))
                 artist = null;
 
             PopulateTracks(artist, album);

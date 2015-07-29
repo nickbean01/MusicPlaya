@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.StatusLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ClearLibButton = new System.Windows.Forms.Button();
             this.ScanRoot = new System.Windows.Forms.Button();
@@ -38,7 +39,8 @@
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.AlbumListBox = new System.Windows.Forms.ListBox();
             this.TrackListBox = new System.Windows.Forms.ListBox();
-            this.StatusLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.UpNextLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +49,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.UpNextLabel);
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.StatusLabel);
             this.panel1.Controls.Add(this.progressBar1);
             this.panel1.Controls.Add(this.ClearLibButton);
@@ -58,6 +62,14 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1016, 111);
             this.panel1.TabIndex = 1;
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(401, 49);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(0, 13);
+            this.StatusLabel.TabIndex = 8;
             // 
             // progressBar1
             // 
@@ -155,13 +167,23 @@
             this.TrackListBox.TabIndex = 4;
             this.TrackListBox.SelectedIndexChanged += new System.EventHandler(this.TrackListBox_SelectedIndexChanged);
             // 
-            // StatusLabel
+            // comboBox1
             // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(401, 49);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(0, 13);
-            this.StatusLabel.TabIndex = 8;
+            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(680, 87);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(330, 21);
+            this.comboBox1.TabIndex = 9;
+            // 
+            // UpNextLabel
+            // 
+            this.UpNextLabel.AutoSize = true;
+            this.UpNextLabel.Location = new System.Drawing.Point(680, 68);
+            this.UpNextLabel.Name = "UpNextLabel";
+            this.UpNextLabel.Size = new System.Drawing.Size(46, 13);
+            this.UpNextLabel.TabIndex = 10;
+            this.UpNextLabel.Text = "Up Next";
             // 
             // Form1
             // 
@@ -192,6 +214,8 @@
         private System.Windows.Forms.Button ClearLibButton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Label UpNextLabel;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

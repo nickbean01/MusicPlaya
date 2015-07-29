@@ -177,6 +177,7 @@ namespace WindowsFormsApplication2
         /* pulls info from metadata (eventually) */
         public void InsertTrack(string TargetPath)
         {
+            TagLib.File tag;
             XElement Track;
             string title;
             string album;
@@ -186,7 +187,7 @@ namespace WindowsFormsApplication2
             int year;
 
             // check for nulls on these and fill in dummy values (Unknown Artist)
-            TagLib.File tag = TagLib.File.Create(TargetPath);
+            tag = TagLib.File.Create(TargetPath);
 
             if ((artist = tag.Tag.FirstAlbumArtist) == null)
                 if ((artist = tag.Tag.FirstPerformer) == null)
