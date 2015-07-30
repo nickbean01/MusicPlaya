@@ -51,7 +51,8 @@ namespace WindowsFormsApplication2
             this.root = new XElement("Library",
                 new XAttribute("Count", "0")
                 );
-            this.root.Save(this.GetPath());
+            //this.root.Save(this.GetPath());
+            File.Delete(this.GetPath());
         }
 
         /* scans given root directory and adds missing files to XML library */
@@ -182,7 +183,7 @@ namespace WindowsFormsApplication2
             string title;
             string album;
             string artist;
-            int trackNum;
+            string trackNum;
             int num;
             string year;
 
@@ -201,7 +202,11 @@ namespace WindowsFormsApplication2
 
             year = tag.Tag.Year.ToString();
 
-            trackNum = (int)tag.Tag.Track;
+            trackNum = tag.Tag.Track.ToString();
+            if(trackNum.Length == 1)
+            {
+                trackNum = "0" + trackNum;
+            }
 
             // get library track counter and increment
             root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());

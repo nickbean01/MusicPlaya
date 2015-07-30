@@ -24,13 +24,13 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
 
-            lib = new MusicLibrary("E:\\Music\\TEST FOLDER", ".mp3", "E:\\Music\\LIBRARY.xml");
-
-            LinkGrid();
+            lib = new MusicLibrary("E:\\Music", ".mp3", "E:\\Music\\LIBRARY.xml");            
 
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
+
+            LinkGrid();
         }
 
         public void LinkGrid()
@@ -40,7 +40,12 @@ namespace WindowsFormsApplication2
                 xmlFile = XmlReader.Create("E:\\Music\\LIBRARY.xml", new XmlReaderSettings());
                 DataSet ds = new DataSet();
                 ds.ReadXml(xmlFile);
-                LibraryGrid.DataSource = ds.Tables[1];
+                if (ds.Tables.Count > 0)
+                {
+                    LibraryGrid.DataSource = ds.Tables[1];
+                }
+                xmlFile.Close();
+                
             }
             catch (Exception ex)
             {
@@ -94,7 +99,7 @@ namespace WindowsFormsApplication2
         private void ClearLibButton_Click(object sender, EventArgs e)
         {
             xmlFile.Close();
-            lib.ClearLibrary();           
+            lib.ClearLibrary();
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
@@ -124,20 +129,66 @@ namespace WindowsFormsApplication2
             PopulateTracks(artist, album);
         }
 
-        private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int selection;
-            if ((selection = TrackListBox.SelectedIndex) != -1)
-                currentTrack = XmlTrackList.ElementAt(selection);
-        }
-
-        private void TrackListBox_DoubleClick(object sender, EventArgs e)
-        {
-            if (TrackListBox.SelectedItem != null)
+            int c = LibraryGrid.CurrentCell.ColumnIndex;
+            if (c == 2) // album
             {
-                MessageBox.Show(TrackListBox.SelectedItem.ToString());
+                MultiSort("Album ASC, TrackNumber ASC");
+            }
+            else if (c == 3) // artist
+            {
+                MultiSort("Artist ASC, Year DESC, TrackNumber ASC");
+            }
+            else if (c == 4) // tracknumber
+            {
+                MultiSort("TrackNumber ASC, Title ASC");
+            }
+            else if (c == 5) // year
+            {
+                MultiSort("Year ASC, Album ASC, TrackNumber ASC");
             }
         }
+
+        private void MultiSort(string query)
+        {
+            DataTable dt = (DataTable)LibraryGrid.DataSource;
+            DataView view = new DataView(dt);
+            view.Sort = query;
+            LibraryGrid.DataSource = view;
+        }
+
+        private void SelectTrackButton_Click(object sender, EventArgs e)
+        {
+            int n = TrackListBox.SelectedIndex;
+            if(n != -1)
+            {
+                currentTrack = XmlTrackList.ElementAt(n);
+                CurrentLabel.Text = "Now Playing: " + currentTrack.Element("Title").Value;
+            }
+            
+        }
+
+        /*public event System.EventHandler CurrentTrackChanged;
+
+        protected virtual void OnCurrentTrackChanged()
+        {
+
+
+        }
+
+        public XElement CurrentTrack
+        {
+            get
+            {
+                return currentTrack;
+            }
+            set
+            {
+                currentTrack = value;
+                OnCurrentTrackChanged();
+            }
+        }*/
 
         /* make a class for the Up-Next listbox with (title - Artist), and value as the path */
     }
