@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ClearLibButton = new System.Windows.Forms.Button();
             this.ScanRoot = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -41,11 +42,31 @@
             this.NextListBox = new System.Windows.Forms.ListBox();
             this.AlbumListBox = new System.Windows.Forms.ListBox();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
+            this.BigSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.LeftBottomContainer = new System.Windows.Forms.SplitContainer();
+            this.RightBottomContainer = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LibraryGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BigSplitContainer)).BeginInit();
+            this.BigSplitContainer.Panel1.SuspendLayout();
+            this.BigSplitContainer.Panel2.SuspendLayout();
+            this.BigSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LeftBottomContainer)).BeginInit();
+            this.LeftBottomContainer.Panel1.SuspendLayout();
+            this.LeftBottomContainer.Panel2.SuspendLayout();
+            this.LeftBottomContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RightBottomContainer)).BeginInit();
+            this.RightBottomContainer.Panel1.SuspendLayout();
+            this.RightBottomContainer.Panel2.SuspendLayout();
+            this.RightBottomContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // ClearLibButton
@@ -87,28 +108,42 @@
             // 
             // LibraryGrid
             // 
+            this.LibraryGrid.AllowUserToAddRows = false;
+            this.LibraryGrid.AllowUserToDeleteRows = false;
+            this.LibraryGrid.AllowUserToOrderColumns = true;
+            this.LibraryGrid.AllowUserToResizeColumns = false;
+            this.LibraryGrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.LibraryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.LibraryGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LibraryGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.LibraryGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.LibraryGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LibraryGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LibraryGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.LibraryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.LibraryGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.LibraryGrid.Location = new System.Drawing.Point(-1, 41);
+            this.LibraryGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LibraryGrid.Location = new System.Drawing.Point(0, 0);
             this.LibraryGrid.Name = "LibraryGrid";
             this.LibraryGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.LibraryGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.LibraryGrid.Size = new System.Drawing.Size(786, 446);
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            this.LibraryGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.LibraryGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.LibraryGrid.Size = new System.Drawing.Size(760, 459);
             this.LibraryGrid.TabIndex = 7;
             // 
             // CurrentLabel
@@ -133,66 +168,129 @@
             // 
             // TrackListBox
             // 
-            this.TrackListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.TrackListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TrackListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrackListBox.FormattingEnabled = true;
-            this.TrackListBox.Location = new System.Drawing.Point(394, 493);
+            this.TrackListBox.Location = new System.Drawing.Point(0, 0);
             this.TrackListBox.Name = "TrackListBox";
-            this.TrackListBox.Size = new System.Drawing.Size(184, 30);
+            this.TrackListBox.Size = new System.Drawing.Size(125, 249);
             this.TrackListBox.TabIndex = 4;
+            this.TrackListBox.SelectedIndexChanged += new System.EventHandler(this.TrackListBox_SelectedIndexChanged);
             // 
             // NextListBox
             // 
-            this.NextListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NextListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NextListBox.FormattingEnabled = true;
-            this.NextListBox.Location = new System.Drawing.Point(584, 493);
+            this.NextListBox.Location = new System.Drawing.Point(0, 0);
             this.NextListBox.Name = "NextListBox";
-            this.NextListBox.Size = new System.Drawing.Size(184, 30);
+            this.NextListBox.Size = new System.Drawing.Size(248, 249);
             this.NextListBox.TabIndex = 5;
             // 
             // AlbumListBox
             // 
-            this.AlbumListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.AlbumListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AlbumListBox.FormattingEnabled = true;
-            this.AlbumListBox.Location = new System.Drawing.Point(203, 493);
+            this.AlbumListBox.Location = new System.Drawing.Point(0, 0);
             this.AlbumListBox.Name = "AlbumListBox";
-            this.AlbumListBox.Size = new System.Drawing.Size(184, 30);
+            this.AlbumListBox.Size = new System.Drawing.Size(183, 249);
             this.AlbumListBox.TabIndex = 3;
             this.AlbumListBox.SelectedIndexChanged += new System.EventHandler(this.AlbumListBox_SelectedIndexChanged);
             // 
             // ArtistListBox
             // 
-            this.ArtistListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ArtistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ArtistListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ArtistListBox.FormattingEnabled = true;
-            this.ArtistListBox.Location = new System.Drawing.Point(12, 493);
+            this.ArtistListBox.Location = new System.Drawing.Point(0, 0);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(184, 30);
+            this.ArtistListBox.Size = new System.Drawing.Size(192, 249);
             this.ArtistListBox.TabIndex = 2;
             this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
+            // 
+            // BigSplitContainer
+            // 
+            this.BigSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BigSplitContainer.Location = new System.Drawing.Point(12, 41);
+            this.BigSplitContainer.Name = "BigSplitContainer";
+            this.BigSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // BigSplitContainer.Panel1
+            // 
+            this.BigSplitContainer.Panel1.Controls.Add(this.LibraryGrid);
+            // 
+            // BigSplitContainer.Panel2
+            // 
+            this.BigSplitContainer.Panel2.Controls.Add(this.splitContainer4);
+            this.BigSplitContainer.Size = new System.Drawing.Size(760, 712);
+            this.BigSplitContainer.SplitterDistance = 459;
+            this.BigSplitContainer.TabIndex = 11;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.LeftBottomContainer);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.RightBottomContainer);
+            this.splitContainer4.Size = new System.Drawing.Size(760, 249);
+            this.splitContainer4.SplitterDistance = 379;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // LeftBottomContainer
+            // 
+            this.LeftBottomContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LeftBottomContainer.Location = new System.Drawing.Point(0, 0);
+            this.LeftBottomContainer.Name = "LeftBottomContainer";
+            // 
+            // LeftBottomContainer.Panel1
+            // 
+            this.LeftBottomContainer.Panel1.Controls.Add(this.ArtistListBox);
+            // 
+            // LeftBottomContainer.Panel2
+            // 
+            this.LeftBottomContainer.Panel2.Controls.Add(this.AlbumListBox);
+            this.LeftBottomContainer.Size = new System.Drawing.Size(379, 249);
+            this.LeftBottomContainer.SplitterDistance = 192;
+            this.LeftBottomContainer.TabIndex = 0;
+            // 
+            // RightBottomContainer
+            // 
+            this.RightBottomContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightBottomContainer.Location = new System.Drawing.Point(0, 0);
+            this.RightBottomContainer.Name = "RightBottomContainer";
+            // 
+            // RightBottomContainer.Panel1
+            // 
+            this.RightBottomContainer.Panel1.Controls.Add(this.TrackListBox);
+            // 
+            // RightBottomContainer.Panel2
+            // 
+            this.RightBottomContainer.Panel2.Controls.Add(this.NextListBox);
+            this.RightBottomContainer.Size = new System.Drawing.Size(377, 249);
+            this.RightBottomContainer.SplitterDistance = 125;
+            this.RightBottomContainer.TabIndex = 0;
             // 
             // MusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.NextListBox);
-            this.Controls.Add(this.ArtistListBox);
-            this.Controls.Add(this.TrackListBox);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(784, 765);
+            this.Controls.Add(this.BigSplitContainer);
             this.Controls.Add(this.SelectTrackButton);
-            this.Controls.Add(this.AlbumListBox);
             this.Controls.Add(this.CurrentLabel);
             this.Controls.Add(this.ClearLibButton);
             this.Controls.Add(this.ScanRoot);
-            this.Controls.Add(this.LibraryGrid);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MusicPlayer";
             this.Text = "Form1";
@@ -201,6 +299,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.LibraryGrid)).EndInit();
+            this.BigSplitContainer.Panel1.ResumeLayout(false);
+            this.BigSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BigSplitContainer)).EndInit();
+            this.BigSplitContainer.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.LeftBottomContainer.Panel1.ResumeLayout(false);
+            this.LeftBottomContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LeftBottomContainer)).EndInit();
+            this.LeftBottomContainer.ResumeLayout(false);
+            this.RightBottomContainer.Panel1.ResumeLayout(false);
+            this.RightBottomContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.RightBottomContainer)).EndInit();
+            this.RightBottomContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +332,10 @@
         private System.Windows.Forms.ListBox NextListBox;
         private System.Windows.Forms.ListBox AlbumListBox;
         private System.Windows.Forms.ListBox ArtistListBox;
+        private System.Windows.Forms.SplitContainer BigSplitContainer;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.SplitContainer LeftBottomContainer;
+        private System.Windows.Forms.SplitContainer RightBottomContainer;
     }
 }
 

@@ -45,6 +45,8 @@ namespace WindowsFormsApplication2
                     LibraryGrid.DataSource = ds.Tables[1];
                 }
                 xmlFile.Close();
+                LibraryGrid.Columns[6].Visible = false;
+                LibraryGrid.Columns[7].Visible = false;
                 
             }
             catch (Exception ex)
@@ -107,9 +109,10 @@ namespace WindowsFormsApplication2
 
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string artist;
-            if((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
-                artist = null;
+            string artist = null;
+            if(ArtistListBox.SelectedIndex != -1)
+                if((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
+                    artist = null;
 
             PopulateAlbums(artist);
             PopulateTracks(artist, null);
@@ -119,13 +122,14 @@ namespace WindowsFormsApplication2
         {
             string album = null;
             string artist = null;
+            if (AlbumListBox.SelectedIndex != -1)
+            {
+                if ((AlbumListBox.SelectedIndex >= 0) && ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums"))
+                    album = null;
 
-            if ((AlbumListBox.SelectedIndex >= 0) && ((album = AlbumListBox.SelectedItem.ToString()) == "All Albums"))
-                album = null;
-
-            if ((ArtistListBox.SelectedIndex >= 0) && ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists"))
-                artist = null;
-
+                if ((ArtistListBox.SelectedIndex >= 0) && ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists"))
+                    artist = null;
+            }           
             PopulateTracks(artist, album);
         }
 
@@ -169,11 +173,29 @@ namespace WindowsFormsApplication2
             
         }
 
+        private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int boxIndex = TrackListBox.SelectedIndex;
+            if (boxIndex != -1)
+            {
+                int rowIndex = -1;
+                DataGridViewRow row = LibraryGrid.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells["ID"].Value.ToString().Equals(XmlTrackList.ElementAt(boxIndex).Attribute("ID").Value))
+                    .First();
+
+                rowIndex = row.Index;
+
+                LibraryGrid.ClearSelection();
+                LibraryGrid.Rows[rowIndex].Selected = true;
+                LibraryGrid.FirstDisplayedScrollingRowIndex = LibraryGrid.SelectedRows[0].Index;
+            }
+        }
+
         /*public event System.EventHandler CurrentTrackChanged;
 
         protected virtual void OnCurrentTrackChanged()
         {
-
 
         }
 
