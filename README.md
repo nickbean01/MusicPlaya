@@ -2,7 +2,7 @@
 A player that plays audio (eventually) and DOES NOTHING ELSE
 
 current beautiful and modern GUI:
-![alt tag](https://raw.githubusercontent.com/nickbean01/MusicPlaya/master/Images/screenshot2015-07-30.png)
+![alt tag](https://raw.githubusercontent.com/nickbean01/MusicPlaya/master/Images/screenshot2015-07-30%2002.png)
 See Images directory for older screenshots.
 
 Currently only runs within Visual Studio (2015).
