@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApplication2
+﻿using System.Windows.Forms;
+
+namespace WindowsFormsApplication2
 {
     partial class MusicPlayer
     {
@@ -111,7 +113,6 @@
             this.LibraryGrid.AllowUserToAddRows = false;
             this.LibraryGrid.AllowUserToDeleteRows = false;
             this.LibraryGrid.AllowUserToOrderColumns = true;
-            this.LibraryGrid.AllowUserToResizeColumns = false;
             this.LibraryGrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -143,8 +144,10 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             this.LibraryGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.LibraryGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.LibraryGrid.Size = new System.Drawing.Size(760, 459);
+            this.LibraryGrid.Size = new System.Drawing.Size(760, 308);
             this.LibraryGrid.TabIndex = 7;
+            //this.LibraryGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LibraryGrid_ColumnHeaderMouseClick);
+            this.LibraryGrid.ColumnHeaderMouseClick += new DataGridViewCellMouseEventHandler(LibraryGrid_ColumnHeaderMouseClick);
             // 
             // CurrentLabel
             // 
@@ -158,7 +161,7 @@
             // SelectTrackButton
             // 
             this.SelectTrackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SelectTrackButton.Location = new System.Drawing.Point(531, 12);
+            this.SelectTrackButton.Location = new System.Drawing.Point(693, 41);
             this.SelectTrackButton.Name = "SelectTrackButton";
             this.SelectTrackButton.Size = new System.Drawing.Size(75, 23);
             this.SelectTrackButton.TabIndex = 10;
@@ -168,44 +171,56 @@
             // 
             // TrackListBox
             // 
+            this.TrackListBox.BackColor = System.Drawing.Color.Gray;
+            this.TrackListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TrackListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TrackListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TrackListBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TrackListBox.FormattingEnabled = true;
             this.TrackListBox.Location = new System.Drawing.Point(0, 0);
             this.TrackListBox.Name = "TrackListBox";
-            this.TrackListBox.Size = new System.Drawing.Size(125, 249);
+            this.TrackListBox.Size = new System.Drawing.Size(125, 167);
             this.TrackListBox.TabIndex = 4;
             this.TrackListBox.SelectedIndexChanged += new System.EventHandler(this.TrackListBox_SelectedIndexChanged);
             // 
             // NextListBox
             // 
+            this.NextListBox.BackColor = System.Drawing.Color.Gray;
+            this.NextListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NextListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NextListBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.NextListBox.FormattingEnabled = true;
             this.NextListBox.Location = new System.Drawing.Point(0, 0);
             this.NextListBox.Name = "NextListBox";
-            this.NextListBox.Size = new System.Drawing.Size(248, 249);
+            this.NextListBox.Size = new System.Drawing.Size(248, 167);
             this.NextListBox.TabIndex = 5;
             // 
             // AlbumListBox
             // 
+            this.AlbumListBox.BackColor = System.Drawing.Color.Gray;
+            this.AlbumListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AlbumListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AlbumListBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.AlbumListBox.FormattingEnabled = true;
             this.AlbumListBox.Location = new System.Drawing.Point(0, 0);
             this.AlbumListBox.Name = "AlbumListBox";
-            this.AlbumListBox.Size = new System.Drawing.Size(183, 249);
+            this.AlbumListBox.Size = new System.Drawing.Size(183, 167);
             this.AlbumListBox.TabIndex = 3;
             this.AlbumListBox.SelectedIndexChanged += new System.EventHandler(this.AlbumListBox_SelectedIndexChanged);
             // 
             // ArtistListBox
             // 
+            this.ArtistListBox.BackColor = System.Drawing.Color.Gray;
+            this.ArtistListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ArtistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ArtistListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArtistListBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ArtistListBox.FormattingEnabled = true;
             this.ArtistListBox.Location = new System.Drawing.Point(0, 0);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(192, 249);
+            this.ArtistListBox.Size = new System.Drawing.Size(192, 167);
             this.ArtistListBox.TabIndex = 2;
             this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
             // 
@@ -214,7 +229,7 @@
             this.BigSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BigSplitContainer.Location = new System.Drawing.Point(12, 41);
+            this.BigSplitContainer.Location = new System.Drawing.Point(12, 70);
             this.BigSplitContainer.Name = "BigSplitContainer";
             this.BigSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -225,8 +240,8 @@
             // BigSplitContainer.Panel2
             // 
             this.BigSplitContainer.Panel2.Controls.Add(this.splitContainer4);
-            this.BigSplitContainer.Size = new System.Drawing.Size(760, 712);
-            this.BigSplitContainer.SplitterDistance = 459;
+            this.BigSplitContainer.Size = new System.Drawing.Size(760, 479);
+            this.BigSplitContainer.SplitterDistance = 308;
             this.BigSplitContainer.TabIndex = 11;
             // 
             // splitContainer4
@@ -242,7 +257,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.RightBottomContainer);
-            this.splitContainer4.Size = new System.Drawing.Size(760, 249);
+            this.splitContainer4.Size = new System.Drawing.Size(760, 167);
             this.splitContainer4.SplitterDistance = 379;
             this.splitContainer4.TabIndex = 0;
             // 
@@ -259,7 +274,7 @@
             // LeftBottomContainer.Panel2
             // 
             this.LeftBottomContainer.Panel2.Controls.Add(this.AlbumListBox);
-            this.LeftBottomContainer.Size = new System.Drawing.Size(379, 249);
+            this.LeftBottomContainer.Size = new System.Drawing.Size(379, 167);
             this.LeftBottomContainer.SplitterDistance = 192;
             this.LeftBottomContainer.TabIndex = 0;
             // 
@@ -276,7 +291,7 @@
             // RightBottomContainer.Panel2
             // 
             this.RightBottomContainer.Panel2.Controls.Add(this.NextListBox);
-            this.RightBottomContainer.Size = new System.Drawing.Size(377, 249);
+            this.RightBottomContainer.Size = new System.Drawing.Size(377, 167);
             this.RightBottomContainer.SplitterDistance = 125;
             this.RightBottomContainer.TabIndex = 0;
             // 
@@ -285,7 +300,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(784, 765);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.BigSplitContainer);
             this.Controls.Add(this.SelectTrackButton);
             this.Controls.Add(this.CurrentLabel);

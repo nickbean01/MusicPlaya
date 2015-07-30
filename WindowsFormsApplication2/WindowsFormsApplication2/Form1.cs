@@ -24,7 +24,7 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
 
-            lib = new MusicLibrary("E:\\Music\\test folder", ".mp3", "E:\\Music\\LIBRARY.xml");            
+            lib = new MusicLibrary("E:\\Music", ".mp3", "E:\\Music\\LIBRARY.xml");            
 
             PopulateArtists();
             PopulateAlbums(null);
@@ -133,22 +133,27 @@ namespace WindowsFormsApplication2
             PopulateTracks(artist, album);
         }
 
-        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void LibraryGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            MessageBox.Show("yup");
             int c = LibraryGrid.CurrentCell.ColumnIndex;
-            if (c == 2) // album
+
+            // gotta change this cause hard coded as fuuuuck
+            if (c == 1) // album
             {
+                MessageBox.Show("ALBUM");
                 MultiSort("Album ASC, TrackNumber ASC");
             }
-            else if (c == 3) // artist
+            else if (c == 2) // artist
             {
-                MultiSort("Artist ASC, Year DESC, TrackNumber ASC");
+                MessageBox.Show("ARTIST");
+                MultiSort("Artist ASC, Year DESC, Album ASC, TrackNumber ASC");
             }
-            else if (c == 4) // tracknumber
+            else if (c == 3) // tracknumber
             {
                 MultiSort("TrackNumber ASC, Title ASC");
             }
-            else if (c == 5) // year
+            else if (c == 4) // year
             {
                 MultiSort("Year ASC, Album ASC, TrackNumber ASC");
             }
