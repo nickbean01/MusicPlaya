@@ -24,7 +24,7 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
 
-            lib = new MusicLibrary("E:\\Music", ".mp3", "E:\\Music\\LIBRARY.xml");            
+            lib = new MusicLibrary("E:\\Music\\test folder", ".mp3", "E:\\Music\\LIBRARY.xml");            
 
             PopulateArtists();
             PopulateAlbums(null);
