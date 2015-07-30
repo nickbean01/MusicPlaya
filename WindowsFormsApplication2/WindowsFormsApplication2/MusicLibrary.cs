@@ -184,7 +184,7 @@ namespace WindowsFormsApplication2
             string artist;
             int trackNum;
             int num;
-            int year;
+            string year;
 
             // check for nulls on these and fill in dummy values (Unknown Artist)
             tag = TagLib.File.Create(TargetPath);
@@ -198,8 +198,9 @@ namespace WindowsFormsApplication2
 
             if ((album = tag.Tag.Album) == null)
                 album = "Unknown Album";
-            
-            year = (int)tag.Tag.Year;
+
+            year = tag.Tag.Year.ToString();
+
             trackNum = (int)tag.Tag.Track;
 
             // get library track counter and increment

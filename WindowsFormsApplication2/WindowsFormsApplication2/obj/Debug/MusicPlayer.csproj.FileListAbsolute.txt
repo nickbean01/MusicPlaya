@@ -5,10 +5,13 @@ C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsForms
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\taglib-sharp.dll
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\policy.2.0.taglib-sharp.config
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\MusicPlayer.csprojResolveAssemblyReference.cache
-C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\MusicPlayer.csproj.GenerateResource.Cache
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.dll
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.xml
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MetroFramework.Design.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MetroFramework.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.MusicPlayer.resources

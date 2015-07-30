@@ -8,25 +8,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace WindowsFormsApplication2
 {
-    public partial class Form1 : Form
+    public partial class MusicPlayer : Form
     {
         MusicLibrary lib;
         IEnumerable<XElement> XmlTrackList;    // collection of Track elements in TrackListBox
         XElement currentTrack;
+        XmlReader xmlFile;
 
-        public Form1()
+        public MusicPlayer()
         {
             InitializeComponent();
 
-            lib = new MusicLibrary("E:\\Music\\test folder", ".mp3", "E:\\Music\\LIBRARY.xml");
+            lib = new MusicLibrary("E:\\Music\\TEST FOLDER", ".mp3", "E:\\Music\\LIBRARY.xml");
+
+            LinkGrid();
 
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
+        }
+
+        public void LinkGrid()
+        {
+            try
+            {
+                xmlFile = XmlReader.Create("E:\\Music\\LIBRARY.xml", new XmlReaderSettings());
+                DataSet ds = new DataSet();
+                ds.ReadXml(xmlFile);
+                LibraryGrid.DataSource = ds.Tables[1];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /* add all artists to artist list */
@@ -65,6 +84,7 @@ namespace WindowsFormsApplication2
         private void ScanRoot_Click(object sender, EventArgs e)
         {
             lib.ScanDirectory(lib.GetRoot());
+            LinkGrid();
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
@@ -73,7 +93,8 @@ namespace WindowsFormsApplication2
 
         private void ClearLibButton_Click(object sender, EventArgs e)
         {
-            lib.ClearLibrary();
+            xmlFile.Close();
+            lib.ClearLibrary();           
             PopulateArtists();
             PopulateAlbums(null);
             PopulateTracks(null, null);
@@ -108,7 +129,14 @@ namespace WindowsFormsApplication2
             int selection;
             if ((selection = TrackListBox.SelectedIndex) != -1)
                 currentTrack = XmlTrackList.ElementAt(selection);
+        }
 
+        private void TrackListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (TrackListBox.SelectedItem != null)
+            {
+                MessageBox.Show(TrackListBox.SelectedItem.ToString());
+            }
         }
 
         /* make a class for the Up-Next listbox with (title - Artist), and value as the path */
