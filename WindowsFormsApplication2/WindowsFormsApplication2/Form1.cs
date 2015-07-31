@@ -19,12 +19,14 @@ namespace WindowsFormsApplication2
         IEnumerable<XElement> XmlTrackList;    // collection of Track elements in TrackListBox
         XElement currentTrack;
         XmlReader xmlFile;
+        
 
         public MusicPlayer()
         {
             InitializeComponent();
+            CheckSettings();
 
-            lib = new MusicLibrary("E:\\Music", ".mp3", "E:\\Music\\LIBRARY.xml");            
+            lib = new MusicLibrary(Properties.Settings.Default.MusicFolderPath, ".mp3", Properties.Settings.Default.LibraryFilePath);            
 
             PopulateArtists();
             PopulateAlbums(null);
@@ -33,11 +35,27 @@ namespace WindowsFormsApplication2
             LinkGrid();
         }
 
+        /* checks setting variables for paths */
+        private void CheckSettings()
+        {
+            if (Properties.Settings.Default.MusicFolderPath == "")
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.MusicFolderPath = fbd.SelectedPath;
+                    Properties.Settings.Default.LibraryFilePath = fbd.SelectedPath + "\\LIBRARY.xml";
+                    Properties.Settings.Default.Save();
+                }
+            }            
+        }
+
+        /* links XML file data to LibraryGrid */
         public void LinkGrid()
         {
             try
             {
-                xmlFile = XmlReader.Create("E:\\Music\\LIBRARY.xml", new XmlReaderSettings());
+                xmlFile = XmlReader.Create(Properties.Settings.Default.LibraryFilePath, new XmlReaderSettings());
                 DataSet ds = new DataSet();
                 ds.ReadXml(xmlFile);
                 if (ds.Tables.Count > 0)
@@ -46,8 +64,7 @@ namespace WindowsFormsApplication2
                 }
                 xmlFile.Close();
                 LibraryGrid.Columns[6].Visible = false;
-                LibraryGrid.Columns[7].Visible = false;
-                
+                LibraryGrid.Columns[7].Visible = false;               
             }
             catch (Exception ex)
             {
@@ -88,6 +105,7 @@ namespace WindowsFormsApplication2
             }
         }
 
+        /* rescans music directory */
         private void ScanRoot_Click(object sender, EventArgs e)
         {
             lib.ScanDirectory(lib.GetRoot());
@@ -98,13 +116,24 @@ namespace WindowsFormsApplication2
             
         }
 
+        /* clears library file */
         private void ClearLibButton_Click(object sender, EventArgs e)
         {
             xmlFile.Close();
-            lib.ClearLibrary();
-            PopulateArtists();
-            PopulateAlbums(null);
-            PopulateTracks(null, null);
+            const string message = "Are you sure that you would like to clear your library?";
+            const string caption = "WARNING";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            // If the no button was pressed ... 
+            if (result == DialogResult.Yes)
+            {
+                lib.ClearLibrary();
+                PopulateArtists();
+                PopulateAlbums(null);
+                PopulateTracks(null, null);
+            }    
         }
 
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,9 +162,28 @@ namespace WindowsFormsApplication2
             PopulateTracks(artist, album);
         }
 
-        private void LibraryGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        /* make this a wrapper method to another in a new thread */
+        private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("yup");
+            int boxIndex = TrackListBox.SelectedIndex;
+            if (boxIndex != -1)
+            {
+                int rowIndex = -1;
+                DataGridViewRow row = LibraryGrid.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells["ID"].Value.ToString().Equals(XmlTrackList.ElementAt(boxIndex).Attribute("ID").Value))
+                    .First();
+
+                rowIndex = row.Index;
+
+                LibraryGrid.ClearSelection();
+                LibraryGrid.Rows[rowIndex].Selected = true;
+                LibraryGrid.FirstDisplayedScrollingRowIndex = LibraryGrid.SelectedRows[0].Index;
+            }
+        }
+
+        /*private void LibraryGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             int c = LibraryGrid.CurrentCell.ColumnIndex;
 
             // gotta change this cause hard coded as fuuuuck
@@ -165,7 +213,7 @@ namespace WindowsFormsApplication2
             DataView view = new DataView(dt);
             view.Sort = query;
             LibraryGrid.DataSource = view;
-        }
+        }*/
 
         private void SelectTrackButton_Click(object sender, EventArgs e)
         {
@@ -176,26 +224,7 @@ namespace WindowsFormsApplication2
                 CurrentLabel.Text = "Now Playing: " + currentTrack.Element("Title").Value;
             }
             
-        }
-
-        private void TrackListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int boxIndex = TrackListBox.SelectedIndex;
-            if (boxIndex != -1)
-            {
-                int rowIndex = -1;
-                DataGridViewRow row = LibraryGrid.Rows
-                    .Cast<DataGridViewRow>()
-                    .Where(r => r.Cells["ID"].Value.ToString().Equals(XmlTrackList.ElementAt(boxIndex).Attribute("ID").Value))
-                    .First();
-
-                rowIndex = row.Index;
-
-                LibraryGrid.ClearSelection();
-                LibraryGrid.Rows[rowIndex].Selected = true;
-                LibraryGrid.FirstDisplayedScrollingRowIndex = LibraryGrid.SelectedRows[0].Index;
-            }
-        }
+        }        
 
         /*public event System.EventHandler CurrentTrackChanged;
 

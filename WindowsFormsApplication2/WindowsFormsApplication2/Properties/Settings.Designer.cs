@@ -22,5 +22,29 @@ namespace WindowsFormsApplication2.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MusicFolderPath {
+            get {
+                return ((string)(this["MusicFolderPath"]));
+            }
+            set {
+                this["MusicFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LibraryFilePath {
+            get {
+                return ((string)(this["LibraryFilePath"]));
+            }
+            set {
+                this["LibraryFilePath"] = value;
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace WindowsFormsApplication2
             this.FileType = type;
             this.xmlPath = path;
             ReadLibrary();
-        }
+        }       
 
         private void CreateLibrary()
         {
@@ -53,6 +53,9 @@ namespace WindowsFormsApplication2
                 );
             //this.root.Save(this.GetPath());
             File.Delete(this.GetPath());
+            Properties.Settings.Default.MusicFolderPath = "";
+            Properties.Settings.Default.LibraryFilePath = "";
+            Properties.Settings.Default.Save();
         }
 
         /* scans given root directory and adds missing files to XML library */
@@ -76,7 +79,7 @@ namespace WindowsFormsApplication2
                         // if path is not in XML file, insert
                         if (!CheckPathExists(TargetPath))
                         {
-                            InsertTrack(TargetPath);
+                            InsertTrack(TargetPath, FileType);
                         }
                     }
                 }
@@ -91,6 +94,58 @@ namespace WindowsFormsApplication2
             }
             root.Save(xmlPath);
             return;
+        }
+
+        /* inserts new track to XML file */
+        public void InsertTrack(string TargetPath, string FileType)
+        {
+            TagLib.File tag;
+            XElement Track;
+            string title;
+            string album;
+            string artist;
+            string trackNum;
+            int num;
+            string year;
+
+            // check for nulls on these and fill in dummy values (Unknown Artist)
+            tag = TagLib.File.Create(TargetPath);
+
+            if ((artist = tag.Tag.FirstAlbumArtist) == null)
+                if ((artist = tag.Tag.FirstPerformer) == null)
+                    artist = "Unknown Artist";
+
+            if ((title = tag.Tag.Title) == null)
+                title = Path.GetFileNameWithoutExtension(TargetPath);
+
+            if ((album = tag.Tag.Album) == null)
+                album = "Unknown Album";
+
+            year = tag.Tag.Year.ToString();
+
+            trackNum = tag.Tag.Track.ToString();
+            if (trackNum.Length == 1)
+            {
+                trackNum = "0" + trackNum;
+            }
+
+            // get library track counter and increment
+            root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
+
+            // create track element and insert to xml tree
+            Track =
+                new XElement("Track",
+                    new XAttribute("ID", num),
+                    new XElement("Title", title),
+                    new XElement("Album", album),
+                    new XElement("Artist", artist),
+                    new XElement("TrackNumber", trackNum),
+                    new XElement("Year", year),
+                    new XElement("DateAdded", DateTime.Now.ToString("g")),
+                    new XElement("Path", TargetPath),
+                    new XElement("Type", FileType)
+                );
+            root.Add(Track);
         }
 
         /* return collection of tracks */
@@ -174,57 +229,7 @@ namespace WindowsFormsApplication2
             return de;
         }
 
-        /* inserts new track to XML file */
-        /* pulls info from metadata (eventually) */
-        public void InsertTrack(string TargetPath)
-        {
-            TagLib.File tag;
-            XElement Track;
-            string title;
-            string album;
-            string artist;
-            string trackNum;
-            int num;
-            string year;
-
-            // check for nulls on these and fill in dummy values (Unknown Artist)
-            tag = TagLib.File.Create(TargetPath);
-
-            if ((artist = tag.Tag.FirstAlbumArtist) == null)
-                if ((artist = tag.Tag.FirstPerformer) == null)
-                    artist = "Unknown Artist";
-
-            if ((title = tag.Tag.Title) == null)
-                title = Path.GetFileNameWithoutExtension(TargetPath);
-
-            if ((album = tag.Tag.Album) == null)
-                album = "Unknown Album";
-
-            year = tag.Tag.Year.ToString();
-
-            trackNum = tag.Tag.Track.ToString();
-            if(trackNum.Length == 1)
-            {
-                trackNum = "0" + trackNum;
-            }
-
-            // get library track counter and increment
-            root.Attribute("Count").SetValue((num = Int32.Parse(root.Attribute("Count").Value) + 1).ToString());
-
-            // create track element and insert to xml tree
-            Track =
-                new XElement("Track",
-                    new XAttribute("ID", num),
-                    new XElement("Title", title),
-                    new XElement("Album", album),
-                    new XElement("Artist", artist),
-                    new XElement("TrackNumber", trackNum),
-                    new XElement("Year", year),
-                    new XElement("DateAdded", DateTime.Now.ToString("g")),
-                    new XElement("Path", TargetPath)
-                );
-            root.Add(Track);
-        }
+       
 
         /* getters */
         public XElement GetXEl()

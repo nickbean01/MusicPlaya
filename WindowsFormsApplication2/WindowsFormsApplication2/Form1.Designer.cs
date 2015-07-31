@@ -146,8 +146,6 @@ namespace WindowsFormsApplication2
             this.LibraryGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.LibraryGrid.Size = new System.Drawing.Size(760, 308);
             this.LibraryGrid.TabIndex = 7;
-            //this.LibraryGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LibraryGrid_ColumnHeaderMouseClick);
-            this.LibraryGrid.ColumnHeaderMouseClick += new DataGridViewCellMouseEventHandler(LibraryGrid_ColumnHeaderMouseClick);
             // 
             // CurrentLabel
             // 
@@ -171,7 +169,7 @@ namespace WindowsFormsApplication2
             // 
             // TrackListBox
             // 
-            this.TrackListBox.BackColor = System.Drawing.Color.Gray;
+            this.TrackListBox.BackColor = System.Drawing.Color.DimGray;
             this.TrackListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TrackListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TrackListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -185,7 +183,7 @@ namespace WindowsFormsApplication2
             // 
             // NextListBox
             // 
-            this.NextListBox.BackColor = System.Drawing.Color.Gray;
+            this.NextListBox.BackColor = System.Drawing.Color.DimGray;
             this.NextListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NextListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -198,7 +196,7 @@ namespace WindowsFormsApplication2
             // 
             // AlbumListBox
             // 
-            this.AlbumListBox.BackColor = System.Drawing.Color.Gray;
+            this.AlbumListBox.BackColor = System.Drawing.Color.DimGray;
             this.AlbumListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AlbumListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,7 +210,7 @@ namespace WindowsFormsApplication2
             // 
             // ArtistListBox
             // 
-            this.ArtistListBox.BackColor = System.Drawing.Color.Gray;
+            this.ArtistListBox.BackColor = System.Drawing.Color.DimGray;
             this.ArtistListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ArtistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ArtistListBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
