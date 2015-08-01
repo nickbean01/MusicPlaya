@@ -2,47 +2,58 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace WindowsFormsApplication2
 {
     internal class MusicLibrary
     {
-        //Queue<XElement> PlayQueue;
-        XElement root;
-        string RootDirectory;
+        public IEnumerable<XElement> XmlTrackList { get; set; }    // collection of Track elements in TrackListBox
+        XElement root { get; set; }
         string FileType;
-        string xmlPath;
 
         public MusicLibrary(string rootPath, string type, string path)
         {
-            this.RootDirectory = rootPath;
+            if (rootPath == "")
+            {
+                ChooseMusicFolder();               
+            }
+            if(path == "")
+            {
+                SetLibraryFilePath(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\LIBRARY.xml");
+                //ChooseLibFileLocation();
+            }
+            else
+            {
+                SetRoot(rootPath);
+                SetLibraryFilePath(path);
+            }
             this.FileType = type;
-            this.xmlPath = path;
             ReadLibrary();
-        }       
+        }
 
         private void CreateLibrary()
         {
-            if (File.Exists(xmlPath))                
+            if (File.Exists(GetLibraryFilePath()))
                 return;
 
             root = new XElement("Library",
                 new XAttribute("Count", "0")
                 );
-            root.Save(xmlPath);
+            root.Save(GetLibraryFilePath());
 
-            ScanDirectory(RootDirectory);
-        }
+            ScanDirectory(GetRoot());
+        }    
 
         /* reads from XML library file */
         public void ReadLibrary()
         {
             // creates XML file if it doesn't already exist
-            if (!File.Exists(xmlPath))
+            if (!File.Exists(GetLibraryFilePath()))
                 CreateLibrary();
             else
-                root = XElement.Load(xmlPath);
+                root = XElement.Load(GetLibraryFilePath());
         }
 
         /* removes all data from XML library file */
@@ -51,25 +62,22 @@ namespace WindowsFormsApplication2
             this.root = new XElement("Library",
                 new XAttribute("Count", "0")
                 );
-            //this.root.Save(this.GetPath());
-            File.Delete(this.GetPath());
-            Properties.Settings.Default.MusicFolderPath = "";
-            Properties.Settings.Default.LibraryFilePath = "";
+
+            File.Delete(this.GetLibraryFilePath());
+            SetRoot("");
             Properties.Settings.Default.Save();
         }
 
         /* scans given root directory and adds missing files to XML library */
         public void ScanDirectory(string TargetDirectory)
         {
-            string[] FileEntries;
+            string[] FileEntries = null;
 
             if (!Directory.Exists(TargetDirectory))
-            {
-                System.Diagnostics.Debug.WriteLine(TargetDirectory + " does not exist.");
                 return;
-            }
 
             FileEntries = Directory.GetFileSystemEntries(TargetDirectory);
+            
             foreach (string TargetPath in FileEntries)
             {
                 if (File.Exists(TargetPath))            // make sure file exists
@@ -92,7 +100,7 @@ namespace WindowsFormsApplication2
                     System.Diagnostics.Debug.WriteLine(TargetPath + " does not exist or cannot be opened.");
                 }
             }
-            root.Save(xmlPath);
+            root.Save(GetLibraryFilePath());
             return;
         }
 
@@ -229,7 +237,90 @@ namespace WindowsFormsApplication2
             return de;
         }
 
-       
+        /*public void DefaultLoad()
+        {
+            PopulateArtists();
+            PopulateAlbums(null);
+            PopulateTracks(null, null);
+        }*/
+
+        /* add all artists to artist list */
+        public void PopulateArtists(ListBox lb)
+        {
+            lb.Items.Clear();
+            lb.Items.Add("All Artists");
+
+            foreach (XElement el in GetArtists())
+                lb.Items.Add(el.Value);
+        }
+
+        /* add albums depending on artist selected */
+        public void PopulateAlbums(ListBox lb, string artist)
+        {
+            lb.Items.Clear();
+            lb.Items.Add("All Albums");
+
+            foreach (XElement el in GetAlbums(artist))
+                lb.Items.Add(el.Value);
+        }
+
+        /* add songs depending on album(s) selected */
+        public void PopulateTracks(ListBox lb, string artist, string album)
+        {
+            lb.Items.Clear();
+            lb.ClearSelected();
+            XmlTrackList = GetTracks(artist, album);
+
+            foreach (XElement el in XmlTrackList)
+            {
+                lb.Items.Add(el.Element("Title").Value);
+            }
+        }
+
+        /* prompts user for music folder location */
+        public Boolean ChooseMusicFolder()
+        {
+            string message =
+                "Music folder "
+                + Properties.Settings.Default.MusicFolderPath
+                + " already exists. Are you sure you want to change it?";
+            string caption = "WARNING";
+
+            /* prompts user if music folder already exists */
+            if ((Properties.Settings.Default.MusicFolderPath == "") ||
+               (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                fbd.Description = "Choose your music folder.";
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    SetRoot(fbd.SelectedPath);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void ChooseLibFileLocation()
+        {
+            string message =
+                "Library location is: "
+                + Properties.Settings.Default.LibraryFilePath + Environment.NewLine
+                + " Are you sure you want to change it?";
+            string caption = "WARNING";
+
+            /* prompts user if music folder already exists */
+            if ((Properties.Settings.Default.LibraryFilePath == "") ||
+               (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                fbd.Description = "Choose library file location.";
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    SetLibraryFilePath(fbd.SelectedPath + "\\LIBRARY.xml");
+                }
+            }
+        }
 
         /* getters */
         public XElement GetXEl()
@@ -239,7 +330,7 @@ namespace WindowsFormsApplication2
 
         public string GetRoot()
         {
-            return this.RootDirectory;
+            return Properties.Settings.Default.MusicFolderPath;
         }
 
         public string GetFileType()
@@ -247,9 +338,9 @@ namespace WindowsFormsApplication2
             return this.FileType;
         }
 
-        public string GetPath()
+        public string GetLibraryFilePath()
         {
-            return this.xmlPath;
+            return Properties.Settings.Default.LibraryFilePath;
         }
 
         /* setters */
@@ -260,7 +351,8 @@ namespace WindowsFormsApplication2
 
         public void SetRoot(string newRoot)
         {
-            RootDirectory = newRoot;
+            Properties.Settings.Default.MusicFolderPath = newRoot;
+            Properties.Settings.Default.Save();
         }
 
         public void SetFileType(string newType)
@@ -268,9 +360,10 @@ namespace WindowsFormsApplication2
             FileType = newType;
         }
 
-        public void SetPath(string newPath)
+        public void SetLibraryFilePath(string newPath)
         {
-            xmlPath = newPath;
+            Properties.Settings.Default.LibraryFilePath = newPath;
+            Properties.Settings.Default.Save();
         }
 
         /* utility method */
