@@ -158,10 +158,10 @@ namespace WindowsFormsApplication2
             Track =
                 new XElement("Track",
                     new XAttribute("ID", num),
+                    new XElement("TrackNumber", trackNum),
                     new XElement("Title", title),
                     new XElement("Album", album),
-                    new XElement("Artist", artist),
-                    new XElement("TrackNumber", trackNum),
+                    new XElement("Artist", artist),                    
                     new XElement("Year", year),
                     new XElement("DateAdded", DateTime.Now.ToString("g")),
                     new XElement("Path", TargetPath),

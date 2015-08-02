@@ -146,6 +146,7 @@ namespace WindowsFormsApplication2
             this.LibraryGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.LibraryGrid.Size = new System.Drawing.Size(760, 308);
             this.LibraryGrid.TabIndex = 7;
+            this.LibraryGrid.ColumnHeaderMouseClick += new DataGridViewCellMouseEventHandler(LibraryGrid_ColumnHeaderMouseClick);
             // 
             // CurrentLabel
             // 

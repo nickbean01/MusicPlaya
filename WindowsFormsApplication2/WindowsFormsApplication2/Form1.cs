@@ -1,5 +1,6 @@
 ﻿using DGVColumnSelector;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -11,24 +12,24 @@ namespace WindowsFormsApplication2
 {
     public partial class MusicPlayer : Form
     {
-        MusicLibrary lib;        
+        MusicLibrary lib;
         XElement currentTrack;
         XmlReader xmlFile;
-        DataGridViewColumnSelector selector; 
-        
+        DataGridViewColumnSelector selector;
+
         public MusicPlayer()
         {
             InitializeComponent();
 
             lib = new MusicLibrary(Properties.Settings.Default.MusicFolderPath, ".mp3", Properties.Settings.Default.LibraryFilePath);
-            
+
             lib.PopulateArtists(ArtistListBox);
             lib.PopulateAlbums(AlbumListBox, null);
             lib.PopulateTracks(TrackListBox, null, null);
 
             LinkGrid();
             selector = new DataGridViewColumnSelector(LibraryGrid);
-        }       
+        }
 
         /* links XML file data to LibraryGrid */
         public void LinkGrid()
@@ -50,7 +51,7 @@ namespace WindowsFormsApplication2
                     LibraryGrid.Columns[7].Visible = false;
                     LibraryGrid.Columns[8].Visible = false;
                 }
-                           
+
             }
             catch (Exception ex)
             {
@@ -101,14 +102,14 @@ namespace WindowsFormsApplication2
 
                 LibraryGrid.DataSource = null;
                 LibraryGrid.Rows.Clear();
-            }    
+            }
         }
 
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string artist = null;
-            if(ArtistListBox.SelectedIndex != -1)
-                if((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
+            if (ArtistListBox.SelectedIndex != -1)
+                if ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists")
                     artist = null;
 
             lib.PopulateAlbums(AlbumListBox, artist);
@@ -126,7 +127,7 @@ namespace WindowsFormsApplication2
 
                 if ((ArtistListBox.SelectedIndex >= 0) && ((artist = ArtistListBox.SelectedItem.ToString()) == "All Artists"))
                     artist = null;
-            }           
+            }
             lib.PopulateTracks(TrackListBox, artist, album);
         }
 
@@ -153,12 +154,27 @@ namespace WindowsFormsApplication2
         private void SelectTrackButton_Click(object sender, EventArgs e)
         {
             int n = TrackListBox.SelectedIndex;
-            if(n != -1)
+            if (n != -1)
             {
                 currentTrack = lib.XmlTrackList.ElementAt(n);
                 CurrentLabel.Text = "Now Playing: " + currentTrack.Element("Title").Value;
             }
-            
-        }        
+
+        }
+        private void LibraryGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            MessageBox.Show("gr8 job");
+            SortDataByMultiColumns("Artist ASC, Year ASC, Album ASC, TrackNumber ASC");
+        }
+        private void SortDataByMultiColumns(string query)
+        {
+            // this works once and then doesn't
+            // something something with linkgrid to reset the source first
+            // above will be inefficient as fuck? who cares
+            DataTable dt = (DataTable)LibraryGrid.DataSource;
+            DataView view = new DataView(dt);
+            view.Sort = query;
+            LibraryGrid.DataSource = view;
+        }
     }
 }
