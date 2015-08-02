@@ -12,3 +12,4 @@ C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsForms
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.dll
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\NAudio.xml
 C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.MusicPlayer.resources
+C:\Users\benen_000\Documents\Visual Studio 2015\Projects\MusicPlaya\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\UltraID3Lib.dll

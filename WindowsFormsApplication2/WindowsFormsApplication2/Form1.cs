@@ -16,13 +16,12 @@ namespace WindowsFormsApplication2
         XmlReader xmlFile;
         DataGridViewColumnSelector selector; 
         
-
         public MusicPlayer()
         {
             InitializeComponent();
 
-            lib = new MusicLibrary(Properties.Settings.Default.MusicFolderPath, ".mp3", Properties.Settings.Default.LibraryFilePath);            
-
+            lib = new MusicLibrary(Properties.Settings.Default.MusicFolderPath, ".mp3", Properties.Settings.Default.LibraryFilePath);
+            
             lib.PopulateArtists(ArtistListBox);
             lib.PopulateAlbums(AlbumListBox, null);
             lib.PopulateTracks(TrackListBox, null, null);
@@ -38,7 +37,7 @@ namespace WindowsFormsApplication2
             {
                 if (File.Exists(lib.GetLibraryFilePath()))
                 {
-                    xmlFile = XmlReader.Create(Properties.Settings.Default.LibraryFilePath, new XmlReaderSettings());
+                    xmlFile = XmlReader.Create(lib.GetLibraryFilePath(), new XmlReaderSettings());
                     DataSet ds = new DataSet();
                     ds.ReadXml(xmlFile);
                     if (ds.Tables.Count > 0)

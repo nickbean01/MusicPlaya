@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HundredMilesSoftware.UltraID3Lib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,18 +16,20 @@ namespace WindowsFormsApplication2
 
         public MusicLibrary(string rootPath, string type, string path)
         {
+            //TagLib.Id3v2.Tag.DefaultVersion = 3;
+            //TagLib.Id3v2.Tag.ForceDefaultVersion = true;
+
             if (rootPath == "")
             {
-                ChooseMusicFolder();               
+                ChooseMusicFolder();
+               
             }
-            if(path == "")
+            if (path == "")
             {
                 SetLibraryFilePath(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\LIBRARY.xml");
-                //ChooseLibFileLocation();
             }
             else
             {
-                SetRoot(rootPath);
                 SetLibraryFilePath(path);
             }
             this.FileType = type;
@@ -108,6 +111,7 @@ namespace WindowsFormsApplication2
         public void InsertTrack(string TargetPath, string FileType)
         {
             TagLib.File tag;
+            UltraID3 uTag;
             XElement Track;
             string title;
             string album;
@@ -118,20 +122,30 @@ namespace WindowsFormsApplication2
 
             // check for nulls on these and fill in dummy values (Unknown Artist)
             tag = TagLib.File.Create(TargetPath);
+            uTag = new UltraID3();
+            uTag.Read(TargetPath);
 
             if ((artist = tag.Tag.FirstAlbumArtist) == null)
                 if ((artist = tag.Tag.FirstPerformer) == null)
-                    artist = "Unknown Artist";
+                    if(((artist = uTag.Artist) == "") || (artist == null))
+                        artist = "Unknown Artist";
 
             if ((title = tag.Tag.Title) == null)
-                title = Path.GetFileNameWithoutExtension(TargetPath);
+                if(((title = uTag.Title) == "" ) || (title == null))
+                    title = Path.GetFileNameWithoutExtension(TargetPath);
 
             if ((album = tag.Tag.Album) == null)
-                album = "Unknown Album";
+                if(((album = uTag.Album) == "") || (album == null))
+                    album = "Unknown Album";
 
-            year = tag.Tag.Year.ToString();
+            if (((year = tag.Tag.Year.ToString()) == null) || (year == "0"))
+                if (((year = uTag.Year.ToString()) == "") || (year == null))
+                    year = "0";
 
-            trackNum = tag.Tag.Track.ToString();
+            if ((trackNum = tag.Tag.Track.ToString()) == null || (trackNum == "0"))
+                if (((trackNum = uTag.TrackNum.ToString()) == "") || (trackNum == null))
+                    trackNum = "0";
+
             if (trackNum.Length == 1)
             {
                 trackNum = "0" + trackNum;
@@ -237,13 +251,6 @@ namespace WindowsFormsApplication2
             return de;
         }
 
-        /*public void DefaultLoad()
-        {
-            PopulateArtists();
-            PopulateAlbums(null);
-            PopulateTracks(null, null);
-        }*/
-
         /* add all artists to artist list */
         public void PopulateArtists(ListBox lb)
         {
@@ -251,7 +258,8 @@ namespace WindowsFormsApplication2
             lb.Items.Add("All Artists");
 
             foreach (XElement el in GetArtists())
-                lb.Items.Add(el.Value);
+                if(el.Value != null)
+                    lb.Items.Add(el.Value);
         }
 
         /* add albums depending on artist selected */
@@ -261,7 +269,8 @@ namespace WindowsFormsApplication2
             lb.Items.Add("All Albums");
 
             foreach (XElement el in GetAlbums(artist))
-                lb.Items.Add(el.Value);
+                if (el.Value != null)
+                    lb.Items.Add(el.Value);
         }
 
         /* add songs depending on album(s) selected */
@@ -273,7 +282,8 @@ namespace WindowsFormsApplication2
 
             foreach (XElement el in XmlTrackList)
             {
-                lb.Items.Add(el.Element("Title").Value);
+                if(el.Element("Title").Value != null)
+                    lb.Items.Add(el.Element("Title").Value);
             }
         }
 

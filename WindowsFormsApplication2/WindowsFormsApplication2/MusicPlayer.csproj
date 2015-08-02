@@ -54,6 +54,9 @@
     <Reference Include="taglib-sharp">
       <HintPath>Taglib\taglib-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="UltraID3Lib">
+      <HintPath>.\UltraID3Lib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataGridViewColumnSelector.cs" />
