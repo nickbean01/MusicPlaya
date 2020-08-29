@@ -1,5 +1,5 @@
 # MusicPlaya
-A player that plays audio (eventually) and DOES NOTHING ELSE
+A player that plays audio.
 
 The goal of this project is to create a very simple music player that satisfies my needs. Also I wanted to learn C# and Visual Studio. 
 
